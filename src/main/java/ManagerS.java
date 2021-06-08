@@ -34,7 +34,11 @@ public class ManagerS {
      * @param items
      */
     public void setItems(String... items){
-        itemNames.addAll(Arrays.asList(items));
+        for(String s:items){
+            itemMap.put(s,new HashMap<String, Object>());
+            itemNames.add(s);
+        }
+
     }
     public void clear() {
         itemNames.clear();
@@ -135,11 +139,11 @@ public class ManagerS {
 
     /***
      * 用于增加一个字段
+     * @param dataId 数据的id，代表数据的索引
      * @param itemName 字段名
-     * @param itemId 数据的id，代表数据的索引
      * @param itemVal 数据的值
      */
-    public void setData(String itemName, String itemId, Object itemVal) {
+    public void setData( String dataId,String itemName, Object itemVal) {
         Map<String, Object> item = getItem(itemName);
         //如果没有这个字段 则新增一个
         if (item == null) {
@@ -149,9 +153,9 @@ public class ManagerS {
 
         if (!itemNames.contains(itemName))
             itemNames.add(itemName);
-        item.put(itemId, itemVal);
-        if (!ids.contains(itemId)) {
-            ids.add(itemId);
+           item.put(dataId, itemVal);
+        if (!ids.contains(dataId)) {
+            ids.add(dataId);
             ID++;
         }
 
@@ -299,9 +303,9 @@ public class ManagerS {
         //id代表字段标签 应该是唯一的
         for (String id : ids) {
             //获取每个字段
-            for (Map.Entry<String, Map<String, Object>> entry : itemMap.entrySet()) {
+            for (String itemName : itemNames) {
                 //在字段中找到id对应的数据val
-                Map<String, Object> values = entry.getValue();
+                Map<String, Object> values = itemMap.get(itemName);
                 Object value = values.get(id);
                 System.out.print(String.valueOf(value));
                 //打印设置的空格
@@ -328,9 +332,9 @@ public class ManagerS {
         //id代表字段标签 应该是唯一的
         for (String id : tpid) {
             //获取每个字段
-            for (Map.Entry<String, Map<String, Object>> entry : itemMap.entrySet()) {
+            for (String itemName : itemNames) {
                 //在字段中找到id对应的数据val
-                Map<String, Object> values = entry.getValue();
+                Map<String, Object> values = itemMap.get(itemName);
                 Object value = values.get(id);
                 System.out.print(String.valueOf(value));
                 //打印设置的空格

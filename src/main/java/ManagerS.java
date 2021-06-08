@@ -13,7 +13,11 @@ public class ManagerS {
     ArrayList<String> ids = new ArrayList<>();//储存所有有效的id
     ArrayList<String> itemNames = new ArrayList<>();//字段属性的名字
     int offset = 5;
-    int ID=1;//主键
+   private int ID=1;//主键 primary key
+
+    public int getID() {
+        return ID;
+    }
 
     /***
      *
@@ -31,6 +35,7 @@ public class ManagerS {
 
     /***
      * 用于把属性名们加入设定 这个顺序会影响标准打印的顺序
+     * 比如 "name"，"age"，"address"....
      * @param items
      */
     public void setItems(String... items){
@@ -185,12 +190,13 @@ public class ManagerS {
     }
 
     /***
+     * 返回满足条件的所有id
      * 比如 ：queryId("name","小明")
      * @param itemName
      * @param itemVal
      * @return 返回itemName字段.equals(itemVal)的id;
      */
-    public ArrayList<String> queryId(String itemName, Object itemVal) {
+    public ArrayList<String> queryIdByItem(String itemName, Object itemVal) {
         Map<String, Object> item = getItem(itemName);
         if (item == null)
             return null;
@@ -203,7 +209,23 @@ public class ManagerS {
     }
 
     /***
-     * 获取数据的一个字段属性
+     * 返回满足条件的第一个ID
+     * @param itemName
+     * @param itemVal
+     * @return
+     */
+    public String querySingleIdByItem(String itemName, Object itemVal) {
+        Map<String, Object> item = getItem(itemName);
+        if (item == null)
+            return null;
+        for (Map.Entry<String, Object> entry : item.entrySet()) {
+            if (entry.getValue().equals(itemVal))
+                return entry.getKey();
+        }
+       return null;
+    }
+    /***
+     * 根据id获取数据的一个字段属性
      * @param id
      * @param itemName
      * @return
@@ -230,7 +252,6 @@ public class ManagerS {
             }
         }
         return list;
-
     }
 
     /***
@@ -300,7 +321,7 @@ public class ManagerS {
             }
         }
         System.out.println();
-        //id代表字段标签 应该是唯一的
+        //id代表字段标签 是数据的主键 应该是唯一的
         for (String id : ids) {
             //获取每个字段
             for (String itemName : itemNames) {
@@ -318,10 +339,10 @@ public class ManagerS {
     }
 
     /***
-     * 标准输出，按照 tpid 的顺序
-     * @param tpid
+     * 标准输出，按照提供的id的顺序，配合sortBy使用
+     * @param offeredId
      */
-    public void showDates(ArrayList<String> tpid) {
+    public void showDates(ArrayList<String> offeredId) {
         for (String itemName : itemNames) {
             System.out.print(itemName);
             for (int i = 0; i < offset - itemName.length(); i++) {
@@ -330,7 +351,7 @@ public class ManagerS {
         }
         System.out.println();
         //id代表字段标签 应该是唯一的
-        for (String id : tpid) {
+        for (String id : offeredId) {
             //获取每个字段
             for (String itemName : itemNames) {
                 //在字段中找到id对应的数据val

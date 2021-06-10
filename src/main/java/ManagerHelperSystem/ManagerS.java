@@ -1,3 +1,6 @@
+package ManagerHelperSystem;
+
+import javax.json.Json;
 import java.io.*;
 import java.util.*;
 import java.util.function.Predicate;
@@ -137,7 +140,34 @@ public class ManagerS {
 
 
     }
-
+//    public void saveToJson() {
+//        File file = new File(loadPath);
+//        try {
+//            BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file));
+//            for (String id : ids) {
+//                bufferedWriter.write(id + "\n");
+//            }
+//            bufferedWriter.write("EndOfID\n");
+//            bufferedWriter.flush();
+//            for (Map.Entry<String, Map<String, Object>> entry : itemMap.entrySet()) {
+//                String itemName = entry.getKey();
+//                Map<String, Object> items = entry.getValue();
+//                for (Map.Entry<String, Object> item : items.entrySet()) {
+//                    String id = item.getKey();
+//                    Object val = item.getValue();
+//                    String json = Json
+//                    bufferedWriter.write(id + "@###@" + itemName + "@###@" + val + "\n");
+//                }
+//            }
+//            bufferedWriter.flush();
+//
+//            bufferedWriter.close();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//
+//
+//    }
     private Map<String, Object> getItem(String itemName) {
         return itemMap.get(itemName);
     }
@@ -243,7 +273,7 @@ public class ManagerS {
      * @param o
      * @return
      */
-    public ArrayList<String> queryItemIf(String itemName, Predicate<Object> o) {
+    public ArrayList<String> queryIdIf(String itemName, Predicate<Object> o) {
         Map<String, Object> item = getItem(itemName);
         ArrayList<String> list = new ArrayList<>();
         for (Map.Entry<String, Object> i : item.entrySet()) {
@@ -254,6 +284,22 @@ public class ManagerS {
         return list;
     }
 
+    /***
+     * 返回满足条件的所有字段
+     * @param itemName
+     * @param o
+     * @return
+     */
+    public ArrayList<Object> queryItemIf(String itemName, Predicate<Object> o) {
+        Map<String, Object> item = getItem(itemName);
+        ArrayList<Object> list = new ArrayList<>();
+        for (Map.Entry<String, Object> i : item.entrySet()) {
+            if (o.test(i.getValue())) {
+                list.add(i.getValue());
+            }
+        }
+        return list;
+    }
     /***
      * 把所有 ifItem属性等于ifValue的数据的modifiedItem属性改为newValue
      * 例如 modify("评分","A+","成绩","100");

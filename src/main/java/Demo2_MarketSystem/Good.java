@@ -1,8 +1,8 @@
 package Demo2_MarketSystem;
 
 public class Good {
-    String name;
-    double price;
-    int count;
+    public String name;
+    public  double price;
+    public int count;
 
 }

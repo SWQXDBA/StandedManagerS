@@ -6,8 +6,8 @@ import java.util.List;
 import java.util.Map;
 
 public class Purchase_order {
-    Map<Good,Integer> goods = new HashMap<>();
-    Customer customer;
+    public  Map<Good,Integer> goods = new HashMap<>();
+    public  Customer customer;
 
     @Override
     public String toString() {

@@ -1,9 +1,9 @@
 package Demo2_MarketSystem;
 
 public class Customer {
-    String userName;
-    String passWord;
-    Double money;
+   public String userName;
+    public String passWord;
+    public Double money;
 
     @Override
     public String toString() {

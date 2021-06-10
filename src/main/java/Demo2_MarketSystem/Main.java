@@ -9,48 +9,49 @@ public class Main {
     static int id=0;
 
     public static void main(String[] args) {
-        ManagerS managerS = new ManagerS("è¶…å¸‚è®¢å•ç®¡ç†ç³»ç»Ÿ","C:\\Users\\SWQXDBA2\\Desktop\\data.txt",10);
+
+        ManagerS managerS = new ManagerS("³¬ÊĞ¶©µ¥¹ÜÀíÏµÍ³","C:\\Users\\SWQXDBA\\Desktop\\cs.txt",10);
         Scanner scanner = new Scanner(System.in);
-        managerS.setItems("å®¢æˆ·","è®¢å•","å•†å“");
+        managerS.setItems("¿Í»§","¶©µ¥","ÉÌÆ·");
         Option addUser = new Option() {
             @Override
             public void Run(ManagerS managerS, Scanner scanner) {
                 Customer customer = new Customer();
-                System.out.println("è¯·è¾“å…¥ç”¨æˆ·å");
+                System.out.println("ÇëÊäÈëÓÃ»§Ãû");
                 customer.userName= scanner.nextLine();
-                System.out.println("è¯·è¾“å…¥å¯†ç ");
+                System.out.println("ÇëÊäÈëÃÜÂë");
                 customer.passWord= scanner.nextLine();
-                System.out.println("è¯·è¾“å…¥è´¦æˆ·é‡‘é¢");
+                System.out.println("ÇëÊäÈëÕË»§½ğ¶î");
                 customer.money= scanner.nextDouble();
                 scanner.nextLine();
-                managerS.setData(String.valueOf(id++),"å®¢æˆ·",customer);
+                managerS.setData(String.valueOf(id++),"¿Í»§",customer);
             }
         };
         Option addGood = new Option() {
             @Override
             public void Run(ManagerS managerS, Scanner scanner) {
                 Good good = new Good();
-                System.out.println("è¯·è¾“å…¥å•†å“åç§°");
+                System.out.println("ÇëÊäÈëÉÌÆ·Ãû³Æ");
                 good.name=scanner.nextLine();
-                System.out.println("è¯·è¾“å…¥å•†å“æ•°é‡");
+                System.out.println("ÇëÊäÈëÉÌÆ·ÊıÁ¿");
                 good.count=scanner.nextInt();
                 scanner.nextLine();
-                System.out.println("è¯·è¾“å…¥å•†å“ä»·æ ¼");
+                System.out.println("ÇëÊäÈëÉÌÆ·¼Û¸ñ");
                 good.price=scanner.nextDouble();
-                managerS.setData(String.valueOf(id++),"å•†å“",good);
+                managerS.setData(String.valueOf(id++),"ÉÌÆ·",good);
             }
         };
         Option showCustomer = new Option() {
             @Override
             public void Run(ManagerS managerS, Scanner scanner) {
-              ArrayList<Object> customers = managerS.queryItemIf("å®¢æˆ·", c->true);
+              ArrayList<Object> customers = managerS.queryItemIf("¿Í»§", c->true);
               for(var i:customers){
                   System.out.println((Customer)i);
               }
-                /*æ–¹æ³•äºŒ
-                ArrayList<String> customers2 = managerS.queryIdIf("å®¢æˆ·", c->true);
+                /*·½·¨¶ş
+                ArrayList<String> customers2 = managerS.queryIdIf("¿Í»§", c->true);
                 for(var i:customers2){
-                    Customer customer =(Customer) managerS.queryItemById(i,"å®¢æˆ·");
+                    Customer customer =(Customer) managerS.queryItemById(i,"¿Í»§");
                     System.out.println(customer);
                 }
                  */
@@ -65,7 +66,7 @@ public class Main {
             }
         };
         while(true){
-            System.out.println("è¯·è¾“å…¥æ‚¨çš„æ“ä½œ 1æ·»åŠ ç”¨æˆ· 2 æ·»åŠ å•†å“ 3 æ˜¾ç¤ºæ‰€æœ‰å®¢æˆ· 4 ä¿å­˜");
+            System.out.println("ÇëÊäÈëÄúµÄ²Ù×÷ 1Ìí¼ÓÓÃ»§ 2 Ìí¼ÓÉÌÆ· 3 ÏÔÊ¾ËùÓĞ¿Í»§ 4 ±£´æ");
             int option;
             option=scanner.nextInt();
             scanner.nextLine();
@@ -75,7 +76,7 @@ public class Main {
                 case 3:showCustomer.Run(managerS,scanner);break;
                 case 4:save.Run(managerS,scanner);break;
                 default:
-                    System.out.println("è¯·é‡æ–°è¾“å…¥");break;
+                    System.out.println("ÇëÖØĞÂÊäÈë");break;
             }
         }
     }

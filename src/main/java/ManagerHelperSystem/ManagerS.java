@@ -1,6 +1,9 @@
 package ManagerHelperSystem;
 
-import javax.json.Json;
+
+import Demo2_MarketSystem.Customer;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import java.io.*;
 import java.util.*;
 import java.util.function.Predicate;
@@ -28,12 +31,13 @@ public class ManagerS {
      * @param loadPath 加载的储存文件路径
      * @param offset 标准打印时，两个属性间隔的距离
      */
-    public ManagerS(String systemName, String loadPath, int offset) {
+    public ManagerS(String systemName, String loadPath, int offset){
         this.systemName = systemName;
         this.loadPath = loadPath;
         this.offset = offset;
         if(loadPath!=null)
         load();
+
     }
 
     /***
@@ -110,6 +114,7 @@ public class ManagerS {
             e.printStackTrace();
         }
     }
+
     /***
      * 保存数据到文件中
      */
@@ -140,34 +145,7 @@ public class ManagerS {
 
 
     }
-//    public void saveToJson() {
-//        File file = new File(loadPath);
-//        try {
-//            BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file));
-//            for (String id : ids) {
-//                bufferedWriter.write(id + "\n");
-//            }
-//            bufferedWriter.write("EndOfID\n");
-//            bufferedWriter.flush();
-//            for (Map.Entry<String, Map<String, Object>> entry : itemMap.entrySet()) {
-//                String itemName = entry.getKey();
-//                Map<String, Object> items = entry.getValue();
-//                for (Map.Entry<String, Object> item : items.entrySet()) {
-//                    String id = item.getKey();
-//                    Object val = item.getValue();
-//                    String json = Json
-//                    bufferedWriter.write(id + "@###@" + itemName + "@###@" + val + "\n");
-//                }
-//            }
-//            bufferedWriter.flush();
-//
-//            bufferedWriter.close();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//
-//
-//    }
+
     private Map<String, Object> getItem(String itemName) {
         return itemMap.get(itemName);
     }
